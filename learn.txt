@@ -1,0 +1,2 @@
+Extra spaces are ignored in html
+Extra new lines are ignored in html
