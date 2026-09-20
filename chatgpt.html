@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>My Cozy Library</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap');
+:root{
+    --bg:#17151a;
+    --panel:#211e24;
+    --panel2:#27232a;
+    --line:#39333c;
+    --cream:#f5eee3;
+    --muted:#aaa0a8;
+    --purple:#80608d;
+    --purple2:#9a79a7;
+    --wood:#6d452b;
+    --room:#b9a28c;
+    --floor:#9c856d}
+    *{
+        box-sizing:border-box
+    }
+    html,body
+    {
+        margin:0;
+        height:100%;
+        overflow:hidden;
+        background:var(--bg);
+        color:var(--cream);
+        font-family:Inter,system-ui,sans-serif
+    }
+    .app
+    {
+        height:100vh;
+        display:grid;
+        grid-template-columns:310px 1fr;
+        grid-template-rows:78px 1fr 166px
+    }
+    .sidebar
+    {
+        grid-row:1/4;
+        background:linear-gradient(180deg,#201d23,#17151a);
+        border-right:1px solid #39333b;
+        padding:22px 14px;
+        overflow:auto;
+        z-index:10
+    }
+    .brand
+    {
+        padding:0 12px 18px;
+        border-bottom:1px solid var(--line);
+        margin-bottom:12px
+    }
+    .brand h1
+    {
+        font:700 31px/1 Cormorant Garamond,serif;
+        margin:0 0 5px;
+        letter-spacing:.2px
+    }
+    .brand h1:before
+    {
+        content:"❧";
+        font-family:serif;
+        margin-right:10px;
+        font-size:27px
+    }
+.brand p{font:italic 16px Cormorant Garamond,serif;color:#b7aab3;margin:0 0 0 39px}
+.top{grid-column:2;background:#201c22e8;border-bottom:1px solid #39333b;display:flex;align-items:center;justify-content:space-between;padding:0 26px;z-index:8}
+.history{display:flex;gap:6px}.top button{background:#242127;border:1px solid #39333b;color:#f0e8de;border-radius:8px;height:43px;padding:0 16px;font:500 13px Inter}.top .icon{font-size:25px;padding:0 11px;color:#c9c0c7}.top-actions{display:flex;gap:7px}.top-actions button{min-width:155px}
+.btn-icon{font-size:19px;margin-right:8px}.section{border:1px solid var(--line);background:linear-gradient(180deg,#29252c,#211e24);border-radius:9px;margin:7px 0;overflow:hidden}
+.section-head{width:100%;border:0;background:none;color:#f0e9df;text-align:left;padding:15px 12px;font:500 15px Inter;letter-spacing:.2px;cursor:pointer}.section-head span{float:right;color:#bcb0b9;font-size:19px}
+.section-body{padding:0 10px 12px}.hidden{display:none}
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.card{background:#252128;border:1px solid #3d3740;border-radius:7px;padding:5px;cursor:pointer;text-align:center;color:#cfc5cc;font-size:9px}.card:hover,.card.active{border-color:#b78ac5;box-shadow:0 0 0 1px #b78ac544 inset}.mini-shelf{height:70px;border-radius:4px;display:flex;justify-content:center;align-items:center;background:#18161b}.mini-frame{width:58%;height:82%;border:5px solid var(--c,#71492d);display:flex;flex-direction:column;gap:5px;padding:5px}.mini-frame i{border-top:4px solid var(--c,#71492d);display:block;flex:1}.card-label{display:block;padding:6px 2px 3px}
+select{width:100%;background:#201d23;color:#eee7df;border:1px solid #413b44;border-radius:7px;padding:10px;font:13px Inter}.label{font-size:11px;color:#a9a0a7;margin:12px 0 6px}.swatches{display:flex;gap:10px}.swatch{width:34px;height:34px;border-radius:50%;border:1px solid #655b61;cursor:pointer}.swatch.active{outline:2px solid #d8c2df;outline-offset:2px}
+.check{display:flex;align-items:center;gap:9px;font-size:12px;color:#c8bec5;margin:9px 0}.check input{accent-color:#8d6a9a}
+.stage{grid-column:2;grid-row:2;position:relative;overflow:hidden;background:linear-gradient(180deg,#bca48e 0%,#c8b29e 70%,#9f8870 70%,#8f7760 100%)}
+.wall{position:absolute;inset:0 0 30% 0;background:radial-gradient(circle at 50% 20%,#d4c2ae33,transparent 45%),linear-gradient(#bda691,#b7a08b)}
+.ceiling{position:absolute;top:0;left:0;right:0;height:8%;background:linear-gradient(#553d2e,#2b211c);box-shadow:0 5px 14px #0005}
+.baseboard{position:absolute;left:0;right:0;bottom:30%;height:12px;background:#705542}
+.window{position:absolute;right:5%;top:10%;width:18%;height:44%;border:10px solid #8b674e;background:linear-gradient(135deg,#9dc1cf,#e5d8c0);box-shadow:inset 0 0 0 5px #d9c7b1,0 8px 20px #3c281b44}
+.window:before,.window:after{content:"";position:absolute;background:#d9c7b1}.window:before{left:50%;top:0;width:5px;height:100%}.window:after{top:50%;left:0;width:100%;height:5px}
+.curtain{position:absolute;right:23%;top:10%;width:6%;height:46%;background:linear-gradient(90deg,#e9ddcd,#b9aa9a);opacity:.75;transform:skew(-4deg)}
+.lights{position:absolute;right:2.5%;top:7%;width:29%;height:52%;border-top:3px dotted #f7d88c;border-right:3px dotted #f7d88c;border-bottom:3px dotted #f7d88c;border-radius:0 25px 25px 0;filter:drop-shadow(0 0 5px #f5cf6c)}
+.lights.off{display:none}
+.frame-wall{position:absolute;left:8%;top:17%;width:11%;height:19%;border:6px solid #5a3e2c;background:#e8dccd;color:#5d4739;display:flex;align-items:center;justify-content:center;text-align:center;font:22px Cormorant Garamond;box-shadow:0 5px 12px #40271955}
+.clock{position:absolute;right:28%;top:18%;width:64px;height:64px;border-radius:50%;border:6px solid #6a4934;background:#e8d5ba;color:#3d3029;display:flex;align-items:center;justify-content:center;font:12px Georgia;box-shadow:0 4px 10px #40271944}.clock:after{content:"";position:absolute;width:2px;height:20px;background:#4b382c;top:13px;transform:rotate(35deg);transform-origin:bottom}
+.shelf{position:absolute;left:50%;top:12%;transform:translateX(-50%);width:44%;height:63%;transition:.25s;filter:drop-shadow(13px 16px 7px #3b24183d)}
+.shelf-frame{position:absolute;inset:0;background:var(--wood,#6d452b);border-radius:5px}
+.shelf-top{position:absolute;left:-7px;right:-7px;top:-8px;height:15px;background:#5b3a27;border-radius:4px}
+.shelf-inside{position:absolute;inset:15px 13px 13px;background:#a8754f;padding:8px;display:flex;flex-direction:column;gap:7px}
+.shelf-row{flex:1;border-bottom:7px solid var(--wood,#6d452b);display:flex;align-items:flex-end;gap:4px;padding:0 5px 4px;overflow:hidden}
+.book{height:75%;min-width:17px;width:17px;border-radius:2px 3px 2px 2px;box-shadow:2px 1px 2px #2c1b1255;position:relative}.book:nth-child(3n){height:88%}.book:nth-child(4n){height:64%}.book span{position:absolute;inset:4px 1px;color:#f9eee0;font-size:7px;writing-mode:vertical-rl;overflow:hidden}
+.shelf-wide{width:58%}.shelf-tall{width:37%;height:73%}.shelf-short{width:49%;height:47%}.shelf-corner{width:40%;height:58%;left:54%}
+.floor-rug{position:absolute;left:8%;right:8%;bottom:2%;height:28%;border-radius:50%;background:radial-gradient(ellipse,#bca48a,#9c836c 72%);box-shadow:inset 0 0 0 10px #b59b80,inset 0 0 0 14px #806751}
+.object{position:absolute;user-select:none;filter:drop-shadow(4px 7px 5px #39241755);transition:.2s}.object:hover{transform:scale(1.03)}.armchair{left:10%;bottom:12%;font-size:118px}.sofa{right:9%;bottom:10%;font-size:115px}.plant{left:4%;bottom:8%;font-size:86px}.desk{right:18%;bottom:13%;font-size:92px}.woodchair{right:25%;bottom:15%;font-size:69px}.floorlamp{right:25%;bottom:11%;font-size:74px}.tablelamp{left:18%;bottom:21%;font-size:52px}.coffee{left:34%;bottom:9%;font-size:72px}.ottoman{left:39%;bottom:12%;font-size:64px}
+.object.hide{display:none}
+.bottom{grid-column:2;grid-row:3;background:#1c191f;border-top:1px solid #3b343d;padding:10px 17px 12px;z-index:9}
+.bottom-tabs{display:flex;gap:5px}.bottom-tabs button{flex:1;border:1px solid #3b343d;background:#252128;color:#cfc5cd;border-radius:7px;padding:12px;font:500 12px Inter}.bottom-tabs button.active{background:linear-gradient(90deg,#624b6c,#74577e);color:white}
+.carousel{display:flex;gap:12px;margin-top:9px;overflow-x:auto;padding-bottom:3px}.item{min-width:100px;background:#252128;border:1px solid #38323a;border-radius:7px;text-align:center;padding:6px;color:#c9c0c6;font-size:10px;cursor:pointer}.item:hover{border-color:#a77ab5}.item .emoji{font-size:52px;line-height:62px;filter:drop-shadow(2px 4px 2px #0005)}
+.tip{position:absolute;left:14px;bottom:14px;width:260px;background:#1e1b21ee;border:1px solid #3b343d;border-radius:9px;padding:15px;z-index:5}.tip h3{margin:0 0 9px;font:18px Cormorant Garamond}.tip p{margin:5px 0;color:#a9a0a7;font-size:11px;line-height:1.6}.tip .x{float:right;background:none;border:0;color:#aaa;font-size:18px}
+.toast{position:fixed;right:25px;bottom:190px;background:#29232d;color:#f4eadf;border:1px solid #5b4961;padding:12px 16px;border-radius:8px;display:none;z-index:30;font-size:12px}
+@media(max-width:900px){.app{grid-template-columns:250px 1fr}.top-actions button{min-width:auto}.tip{display:none}.shelf{width:55%}.sofa{font-size:85px}}
+</style>
+</head>
+<body>
+<div class="app">
+<aside class="sidebar">
+<div class="brand"><h1>My Cozy Library</h1><p>Build your dream library</p></div>
+
+<div class="section">
+<button class="section-head" onclick="toggle('shelfPanel')">1. CHOOSE BOOKSHELF <span>⌃</span></button>
+<div class="section-body" id="shelfPanel">
+<div class="cards">
+<div class="card active" onclick="chooseShelf('classic',this)">
+    <div class="mini-shelf">
+        <div class="mini-frame">
+            <i/><i/><i/><i/>
+        </div>
+    </div>
+    <span class="card-label">Classic</span></div>
+<div class="card" onclick="chooseShelf('cream',this)">
+    <div class="mini-shelf">
+        <div class="mini-frame" style="--c:#ded2bd;
+            border-color:#ded2bd">
+            <i/><i/><i/>
+        </div>
+    </div>
+    <span class="card-label">Cream</span>
+</div>
+<div class="card" onclick="chooseShelf('arched',this)">
+    <div class="mini-shelf">
+        <div class="mini-frame" style="--c:#583b2a;
+        border-radius:18px 18px 0 0">
+        <i/><i/><i/>
+    </div>
+</div>
+<span class="card-label">Arched</span>
+</div>
+<div class="card" onclick="chooseShelf('open',this)"><div class="mini-shelf"><div class="mini-frame" style="--c:#25262a;border-width:3px"><i/><i/><i/></div></div><span class="card-label">Open</span></div>
+<div class="card" onclick="chooseShelf('tall',this)"><div class="mini-shelf"><div class="mini-frame" style="--c:#5b3d29;height:92%"><i/><i/><i/><i/><i/></div></div><span class="card-label">Tall</span></div>
+<div class="card" onclick="chooseShelf('cube',this)"><div class="mini-shelf"><div class="mini-frame" style="--c:#69442b"><i/><i/><i/></div></div><span class="card-label">Cube</span></div>
+</div>
+<div class="label">BOOKSHELF SIZE</div><select onchange="setSize(this.value)"><option value="large">Large (5 shelves)</option><option value="medium">Medium (4 shelves)</option><option value="small">Small (3 shelves)</option></select>
+<div class="label">BOOKSHELF COLOR</div><div class="swatches">
+<div class="swatch active" style="background:#6d452b" onclick="setColor('#6d452b',this)"></div>
+<div class="swatch" style="background:#9a6b45" onclick="setColor('#9a6b45',this)"></div>
+<div class="swatch" style="background:#d8c8b3" onclick="setColor('#d8c8b3',this)"></div>
+<div class="swatch" style="background:#27272a" onclick="setColor('#27272a',this)"></div>
+<div class="swatch" style="background:#485341" onclick="setColor('#485341',this)"></div>
+</div>
+</div></div>
+
+<div class="section"><button class="section-head" onclick="toggle('booksPanel')">2. ADD BOOKS <span>›</span></button>
+<div class="section-body hidden" id="booksPanel"><button onclick="addBook()" style="width:100%;background:#73547f;color:white;border-color:#876596">＋ Add a book I own</button><p style="font-size:11px;color:#9f969d">Books added here appear on your shelf.</p></div></div>
+
+<div class="section"><button class="section-head" onclick="toggle('furniturePanel')">3. FURNITURE <span>›</span></button>
+<div class="section-body hidden" id="furniturePanel">
+<label class="check"><input type="checkbox" checked onchange="showObj('armchair',this.checked)"> Armchair</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('sofa',this.checked)"> Sofa</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('desk',this.checked)"> Desk</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('woodchair',this.checked)"> Wooden chair</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('coffee',this.checked)"> Coffee table</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('ottoman',this.checked)"> Ottoman</label>
+</div></div>
+
+<div class="section"><button class="section-head" onclick="toggle('decorPanel')">4. DECOR & LIGHTS <span>›</span></button>
+<div class="section-body hidden" id="decorPanel">
+<label class="check"><input type="checkbox" checked onchange="showObj('plant',this.checked)"> Plants</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('clock',this.checked)"> Wall clock</label>
+<label class="check"><input type="checkbox" checked onchange="document.querySelector('.lights').classList.toggle('off',!this.checked)"> Fairy lights</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('floorlamp',this.checked)"> Floor lamp</label>
+<label class="check"><input type="checkbox" checked onchange="showObj('tablelamp',this.checked)"> Table lamp</label>
+</div></div>
+
+<div class="section"><button class="section-head" onclick="toggle('wallPanel')">5. WALL & FLOOR <span>›</span></button>
+<div class="section-body hidden" id="wallPanel">
+<div class="label">ROOM MOOD</div><select onchange="setMood(this.value)"><option value="warm">Warm & Cozy</option><option value="day">Soft Daylight</option><option value="night">Evening</option></select>
+</div></div>
+
+<div class="tip"><button class="x" onclick="this.parentElement.style.display='none'">×</button><h3>Tips</h3><p>• Click a bookshelf to change its style.</p><p>• Add books from the sidebar.</p><p>• Use the bottom toolbar to add furniture.</p></div>
+</aside>
+
+<header class="top">
+<div class="history"><button class="icon" onclick="toast('Undo is ready for the next interaction layer.')">↶</button><button class="icon" onclick="toast('Redo is ready for the next interaction layer.')">↷</button></div>
+<div class="top-actions"><button onclick="saveLibrary()">▣ &nbsp; Save Library</button><button onclick="loadLibrary()">▱ &nbsp; Load Library</button><button onclick="clearRoom()">♜ &nbsp; Clear Room</button></div>
+</header>
+
+<section class="stage" id="stage">
+<div class="wall"></div><div class="ceiling"></div><div class="baseboard"></div>
+<div class="window"></div><div class="curtain"></div><div class="lights"></div>
+<div class="frame-wall">So many<br>books,<br>so little<br>time.</div><div class="clock object" id="clock">12</div>
+<div class="shelf" id="shelf"><div class="shelf-frame"></div><div class="shelf-top"></div><div class="shelf-inside" id="bookArea"></div></div>
+<div class="floor-rug"></div>
+<div class="object armchair" id="armchair">🛋️</div><div class="object sofa" id="sofa">🛋️</div><div class="object plant" id="plant">🪴</div><div class="object desk" id="desk">🪵</div><div class="object woodchair" id="woodchair">🪑</div><div class="object floorlamp" id="floorlamp">🛋️</div><div class="object tablelamp" id="tablelamp">🪔</div><div class="object coffee" id="coffee">🪵</div><div class="object ottoman" id="ottoman">🟩</div>
+<div class="toast" id="toast"></div>
+</section>
+
+<footer class="bottom">
+<div class="bottom-tabs"><button onclick="showTab(this)">▣ &nbsp; 2. ADD BOOKS</button><button class="active" onclick="showTab(this)">⌗ &nbsp; 3. FURNITURE</button><button onclick="showTab(this)">☼ &nbsp; 4. DECOR & LIGHTS</button></div>
+<div class="carousel" id="carousel">
+<div class="item" onclick="showObj('armchair',true)"><div class="emoji">🛋️</div>Armchair 1</div>
+<div class="item" onclick="showObj('armchair',true)"><div class="emoji">🪑</div>Armchair 2</div>
+<div class="item" onclick="showObj('sofa',true)"><div class="emoji">🛋️</div>Sofa 1</div>
+<div class="item" onclick="showObj('sofa',true)"><div class="emoji">🛋️</div>Sofa 2</div>
+<div class="item" onclick="showObj('coffee',true)"><div class="emoji">🪵</div>Coffee Table</div>
+<div class="item" onclick="showObj('ottoman',true)"><div class="emoji">🟩</div>Side Table</div>
+<div class="item" onclick="showObj('desk',true)"><div class="emoji">🪵</div>Desk</div>
+<div class="item" onclick="showObj('woodchair',true)"><div class="emoji">🪑</div>Wooden Chair</div>
+<div class="item" onclick="showObj('floorlamp',true)"><div class="emoji">🛋️</div>Floor Lamp</div>
+<div class="item" onclick="showObj('tablelamp',true)"><div class="emoji">🪔</div>Table Lamp</div>
+</div>
+</footer>
+</div>
+
+<script>
+const defaultBooks=["The Hobbit","Pride & Prejudice","The Little Prince","Dune","Jane Eyre","Persuasion","Circe","The Alchemist"];
+let state={books:defaultBooks.slice(),shelf:"classic",size:"large",color:"#6d452b",mood:"warm"};
+function toggle(id){document.getElementById(id).classList.toggle("hidden")}
+function chooseShelf(type,el){state.shelf=type;document.querySelectorAll(".card").forEach(x=>x.classList.remove("active"));el.classList.add("active");const s=document.getElementById("shelf");s.className="shelf";if(type==="tall")s.classList.add("shelf-tall");if(type==="short")s.classList.add("shelf-short");if(type==="wide")s.classList.add("shelf-wide");if(type==="corner")s.classList.add("shelf-corner");if(type==="cream")s.style.setProperty("--wood","#d8c8b3");else s.style.setProperty("--wood",state.color);renderBooks();toast(type.charAt(0).toUpperCase()+type.slice(1)+" bookshelf selected")}
+function setSize(v){state.size=v;const s=document.getElementById("shelf");s.style.height=v==="large"?"63%":v==="medium"?"55%":"46%";renderBooks()}
+function setColor(c,el){state.color=c;document.querySelectorAll(".swatch").forEach(x=>x.classList.remove("active"));el.classList.add("active");document.getElementById("shelf").style.setProperty("--wood",c)}
+function renderBooks(){const area=document.getElementById("bookArea");area.innerHTML="";let rows=state.size==="large"?5:state.size==="medium"?4:3;for(let r=0;r<rows;r++){let row=document.createElement("div");row.className="shelf-row";state.books.slice(0,Math.ceil(state.books.length/rows)).forEach((b,i)=>{let x=document.createElement("div");x.className="book";x.style.background=["#694b70","#9b684c","#4e6862","#aa8647","#5f5379","#854d50","#50677a"][i%7];x.innerHTML="<span>"+b+"</span>";x.title=b;row.appendChild(x)});area.appendChild(row)}}
+function addBook(){let title=prompt("Enter a book you own:");if(title&&title.trim()){state.books.push(title.trim());renderBooks();toast("Book added to your library.")}}
+function showObj(id,on){document.getElementById(id).classList.toggle("hide",!on)}
+function setMood(v){state.mood=v;document.querySelector(".stage").style.filter=v==="night"?"brightness(.72)":v==="day"?"brightness(1.08)":"brightness(1)"}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.style.display="block";clearTimeout(window.tt);window.tt=setTimeout(()=>t.style.display="none",2200)}
+function saveLibrary(){localStorage.setItem("cozyLibraryV01b",JSON.stringify(state));toast("Library saved in this browser ✓")}
+function loadLibrary(){const x=localStorage.getItem("cozyLibraryV01b");if(!x){toast("No saved library found yet.");return}state=JSON.parse(x);document.getElementById("shelf").style.setProperty("--wood",state.color);setSize(state.size);renderBooks();setMood(state.mood);toast("Library loaded ✓")}
+function clearRoom(){state.books=[];renderBooks();["armchair","sofa","plant","desk","woodchair","floorlamp","tablelamp","coffee","ottoman"].forEach(x=>showObj(x,false));document.querySelector(".lights").classList.add("off");toast("Room cleared.")}
+function showTab(btn){document.querySelectorAll(".bottom-tabs button").forEach(x=>x.classList.remove("active"));btn.classList.add("active")}
+renderBooks();
+</script>
+</body>
+</html>
