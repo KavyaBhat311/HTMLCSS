@@ -1,2 +1,19 @@
+HTML - Hyper Text Markup Language
 Extra spaces are ignored in html
 Extra new lines are ignored in html
+
+CSS - Cascading Style Sheets
+Change the appearance of HTML elements
+
+<a href="https://www.youtube.com/" 
+   target="_blank">
+   Link to youtube
+</a> <!-- anchor element (link to another website)-->
+<!-- target="_blank" - opens a link in new page -->
+<!-- href and target work only on link element -->
+<!-- Line 3 is a html attribute - modifies how an element behaves -->
+
+External links used for project
+1. Google fonts: https://fonts.google.com/selection/embed
+
+<div> -- Contains elements as a container for website
