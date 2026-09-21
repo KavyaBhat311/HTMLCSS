@@ -1,34 +1,84 @@
-    body { background-color: rgb(1, 35, 46);}
-    .to-do 
-    {
-        /* CSS Selector - which elements to style or which elements we're targetting*/
-        background-color: #e0a159;
-        /* css property: css value */
-        color: white;
-        /* border: none; */
-        border-radius: 4px;
-        /* border-style: solid; */
-        height: 24px; 
-        width: 240px;
-        cursor:pointer; /* Change cursor style*/
-        transition: opacity 0.15s; /* Smooth opacity transition */
-        padding-top: 5px; /* add spacing inside the button*/
-        padding-bottom: 20px; 
-    }
-    .to-do:hover
-    {
-        /* background-color: #b07838; */
-        opacity: 0.3; /* Slightly transparent on hover */
-        text-decoration: underline; /* underline style */
-    }
-    .to-do:active
-    {
-        background-color: #624a2f; /* Change color when clicked */
-    }
+body { background-color: rgb(1, 35, 46);}
+.to-do 
+{
+    /* CSS Selector - which elements to style or which elements we're targetting*/
+    background-color: #e0a159;
+    /* css property: css value */
+    color: white;
+    /* border: none; */
+    border-radius: 4px;
+    /* border-style: solid; */
+    height: 24px; 
+    width: 240px;
+    cursor:pointer; /* Change cursor style*/
+    transition: opacity 0.15s; /* Smooth opacity transition */
+    padding-top: 5px; /* add spacing inside the button*/
+    padding-bottom: 20px; 
+}
+.to-do:hover
+{
+    /* background-color: #b07838; */
+    opacity: 0.3; /* Slightly transparent on hover */
+    text-decoration: underline; /* underline style */
+}
+.to-do:active
+{
+    background-color: #624a2f; /* Change color when clicked */
+}
 
-    /* When the checkbox is checked, select the adjacent label and cross it out */
-    input[type="checkbox"]:checked + label 
-    {
-    text-decoration: line-through;
-    color: #888; /* Dims the text slightly */
-    }
+/* When the checkbox is checked, select the adjacent label and cross it out */
+input[type="checkbox"]:checked + label 
+{
+text-decoration: line-through;
+color: #888; /* Dims the text slightly */
+}
+.bookishcorner
+{
+    display:block;
+}
+.Bookish-corner 
+{
+    background-color: #73473c;
+    color: rgb(217, 210, 210);
+    font-size: 14px;
+    font-family:'Allison', cursive; 
+    border-radius: 40px;
+    border-color: rgb(47, 41, 41);
+    height: 80px; 
+    width: 350px;
+    margin-bottom: 2px; 
+    cursor:pointer;
+    transition: box-shadow 0.3s ease
+                color 0.15s; 
+    vertical-align: middle; 
+}
+.Bookish-corner:hover
+{
+    box-shadow: 5px 5px 8px rgba(135, 135, 135, 0.8);
+    color: rgb(255, 255, 255);
+}
+.design-kb
+{
+    font-size: 24px;
+    letter-spacing: 2px;
+}
+.library-png
+{
+    width: 300px; 
+    object-fit: contain;
+    border-radius: 20px;
+    border-style: solid;
+    border-color: rgb(183, 10, 10);
+}
+.library-list
+{
+    width:300px;
+    display:inline-block;
+    vertical-align:top;
+}
+.search-bar
+{
+    width: 180px;
+    border-radius: 4px;
+    border-color: rgb(183, 10, 10);
+}
