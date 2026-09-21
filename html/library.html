@@ -2,99 +2,23 @@
 <html>
     <head>
         <title>Library</title>
-        <link rel="stylesheet" href="styles/library.css"> 
+        <link rel="stylesheet" href="../styles/library.css"> 
+
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Allison&display=swap" rel="stylesheet">
-        <style>
-            .bookishcorner
-            {
-                /* width:300px; */
-                display:block;
-            }
-            .Bookish-corner 
-            {
-                /* CSS Selector - which elements to style or which elements we're targetting*/
-                background-color: #73473c;
-                /* css property: css value */
-                color: rgb(217, 210, 210);
-                /* border: none; */
-                font-size: 14px;
-                /* font-weight: bold; */
-                font-family:'Allison', cursive; /* Custom font for the button text */
-                border-radius: 40px;
-                border-color: rgb(47, 41, 41);
-                height: 80px; /* px - pixels */
-                width: 350px;
-                /* align-items: center; */
-                margin-bottom: 2px; /* Adds space below the button */
-                cursor:pointer; /* Change cursor style*/
-                transition: box-shadow 0.3s ease
-                            color 0.15s; /* Smooth transition for box-shadow */
-                vertical-align: middle; /* Aligns the button vertically in the middle */
-            }
-            .Bookish-corner:hover
-            {
-                box-shadow: 5px 5px 8px rgba(135, 135, 135, 0.8);
-                color: rgb(255, 255, 255);
-            }
-            .design-kb
-            {
-                font-size: 24px;
-                letter-spacing: 2px;
-            }
-            .library-png
-            {
-                width: 300px; 
-                /* height: 300px;
-                object-fit: contain; */
-                object-position: left;
-                border-radius: 20px;
-                margin-right: 200px; /* Adds space to the right of the image */
-            }
-            .library-png2
-            {
-                width: 300px; 
-                /* height: 300px;
-                object-fit: contain; */
-                object-position: right;
-                margin-left: 260px; /* Adds space to the left of the image */
-                border-radius: 20px;
-            }
-            .library-img
-            {
-                width:50px;
-                display:inline-block;
-            }
-
-            .search-bar
-            {
-                width: 180px;
-                /* display: inline-block; */
-                /* vertical-align: top; */
-            }
-        </style>
-        
+    </head>
+    <body>
         <div class="bookishcorner">
-            <button class = "Bookish-corner"> 📚&#183 Ⓜⓨ &#183 🆂🅷🅴🅻🅵 &#183 Ⓛⓘⓕⓔ &#183&nbsp;&nbsp;🪟<br>
-            <span class="design-kb">Designed by Kavya Bhat</span>
-            </button>
-            <!-- &#183 - HTML-CODE's dot -->
-            <!-- class is like giving a label to attributes -->
-            <br> <br>
+        <button class = "Bookish-corner"> 📚&#183 Ⓜⓨ &#183 🆂🅷🅴🅻🅵 &#183 Ⓛⓘⓕⓔ &#183&nbsp;&nbsp;🪟<br>
+        <span class="design-kb">Designed by Kavya Bhat</span>
+        </button><br> <br>
         </div>
 
-        <div class="library-img">
-            <img class="library-png" src="images/library.webp" alt="Library Image">
-        </div>
-
-        <div>
-            <input class="search-bar" type="text" placeholder="Search for your book 🔍 📖" class="search-bar">
-        </div>
-    
-        <div class="todo">
-            <button class="to-do"> To Do &#10003
-            </button>
+        <div class="library-list">
+            <img class="library-png" src="../images/library.webp" alt="Library Image">
+            <input class="search-bar" type="text" placeholder="Search for your book 🔍 📖">
+            <button class="to-do"> To Do &#10003 </button>
         </div>
 
         <div class="list-todo">
@@ -154,6 +78,6 @@
             <!-- #endregion -->
         </div>
 
-    </head> <!-- contains all the elements that are visible on the page -->
+    </body> 
 </html>
 
