@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Add Book</title>
+        <link href="https://fonts.googleapis.com/css2?family=Allison&display=swap" rel="stylesheet">
+    </head>
+    <body>
+        <header>
+            <h1>Reader's record</h1>
+        </header>
+        <div class="container">
+            <div class="header">
+                <div id="image-container">
+                    <img src="../images/library.webp" alt="bookshelf" id="bookImage">
+                </div>
+            </div>
+
+            <div class="form">
+                <div class="left">
+                    <h2>Book Information</h2>
+                    <label for="bookName">Book Name:</label>
+                    <input type="text" id="bookName" name="bookName" required>
+
+                    <label for="isbn">ISBN:</label>
+                    <div class="input-icon">
+                        <input type="text" id="isbn" name="isbn" required>
+                        <i class="fa fa-search"></i>
+                    </div>
+
+                    <label for="authorName">Author Name:</label>
+                    <input type="text" id="authorName" name="authorName" required>
+                
+                </div>
+                <div class="right">
+                    <h2>Additional Information</h2>
+                    <label for="publishedDate">Published Date:</label>
+                    <input type="date" id="publishedDate" name="publishedDate" required>
+
+                    <label for="genreInput">Genre Input</Input>:</label>
+                    <input type="text" id="genreInput" name="genreInput" required>
+
+                    <label for="description">Description</label>
+                    <textarea id="text" id="description" name="description" rows="5" required>
+                </div>
+                <div class="button-container">
+                    <button type="button" class="btns">Submit</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
