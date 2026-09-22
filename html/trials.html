@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Virtual Library Shelf Tracker</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f1ea;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        h1 {
+            color: #4a3b32;
+            margin-bottom: 10px;
+        }
+        .search-container {
+            width: 100%;
+            max-width: 600px;
+            display: flex;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #c2b69d;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+        }
+        input[type="text"]:focus {
+            border-color: #8c7a6b;
+        }
+        button {
+            padding: 12px 24px;
+            background-color: #8c7a6b;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+        }
+        button:hover {
+            background-color: #736254;
+        }
+        /* Virtual Shelf Concept Layout */
+        .shelf {
+            width: 100%;
+            max-width: 900px;
+            background-color: #736254;
+            border-bottom: 16px solid #4a3b32;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+            padding: 20px 20px 0 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            min-height: 180px;
+            align-items: flex-end;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        /* Lining items fluid flex structure */
+        .book-item {
+            width: 110px;
+            height: 160px;
+            background-color: #d2b48c;
+            border-radius: 2px 6px 6px 2px;
+            box-shadow: -3px 3px 5px rgba(0,0,0,0.3), inset 2px 0 3px rgba(255,255,255,0.2);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: -4px;
+        }
+        .book-item:hover {
+            transform: translateY(-10px) scale(1.05);
+            box-shadow: -5px 10px 12px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+        .book-fallback-title {
+            font-size: 11px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            color: #333;
+            text-shadow: 1px 1px 1px rgba(255,255,255,0.6);
+        }
+        .error-message {
+            color: #a63a3a;
+            margin-top: -15px;
+            margin-bottom: 15px;
+            font-weight: bold;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>My Virtual Library Shelf</h1>
+    <p>Connected via Official Google Books API Endpoint</p>
+
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Type title (e.g., Dune, The Hobbit, Goblet of Fire)...">
+        <button id="search-btn">Add to Shelf</button>
+    </div>
+    
+    <div class="error-message" id="error-msg"></div>
+
+    <div class="shelf" id="library-shelf"></div>
+
+    <script>
+        // INSERT YOUR UNIQUE GOOGLE CLOUD GENERATED STRING HERE
+        const GOOGLE_API_KEY = "AIzaSyBjWIhbcI_sQ7sI1b4LKkfVqn-mIOi704w"; 
+
+        const searchInput = document.getElementById('search-input');
+        const searchBtn = document.getElementById('search-btn');
+        const libraryShelf = document.getElementById('library-shelf');
+        const errorMsg = document.getElementById('error-msg');
+
+        searchBtn.addEventListener('click', searchAndAddBook);
+        searchInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchAndAddBook();
+            }
+        });
+
+        async function searchAndAddBook() {
+            const query = searchInput.value.trim();
+            if (!query) return;
+
+            errorMsg.textContent = ""; 
+            
+            // Check to ensure you updated the key placeholder
+            if (GOOGLE_API_KEY.includes("YOUR_FREE_GOOGLE_API_KEY")) {
+                errorMsg.textContent = "Please replace 'YOUR_FREE_GOOGLE_API_KEY_HERE' in the script with your real Google Cloud Console API Key.";
+                return;
+            }
+
+            try {
+                // Query using authorized API parameter payload signature
+                const url = `https://googleapis.com{encodeURIComponent(query)}&maxResults=1&key=${GOOGLE_API_KEY}`;
+                
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP network fault statement: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                
+                if (!data.items || data.items.length === 0) {
+                    errorMsg.textContent = "No books matching that description found in Google's indexing database.";
+                    return;
+                }
+
+                // target nearest indexing object item 
+                const bookInfo = data.items[0].volumeInfo;
+                const title = bookInfo.title || "Unknown Title";
+                
+                let coverUrl = "";
+                if (bookInfo.imageLinks) {
+                    coverUrl = bookInfo.imageLinks.thumbnail || bookInfo.imageLinks.smallThumbnail;
+                    // Switch to secure HTTPS context directly
+                    if (coverUrl.startsWith("http://")) {
+                        coverUrl = coverUrl.replace("http://", "https://");
+                    }
+                }
+
+                const bookDiv = document.createElement('div');
+                bookDiv.className = 'book-item';
+                bookDiv.title = title; 
+
+                if (coverUrl) {
+                    bookDiv.style.backgroundImage = `url('${coverUrl}')`;
+                } else {
+                    bookDiv.innerHTML = `<div class="book-fallback-title">${title}</div>`;
+                }
+
+                // Line books up one after another onto shelf
+                libraryShelf.appendChild(bookDiv);
+                
+                searchInput.value = "";
+                searchInput.focus();
+
+            } catch (error) {
+                console.error(error);
+                errorMsg.textContent = "Failed to query Google. Verify your API Key configuration or check your network security restrictions.";
+            }
+        }
+    </script>
+</body>
+</html>
