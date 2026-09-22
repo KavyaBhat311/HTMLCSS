@@ -178,3 +178,21 @@ External links used for project
     </head> <!-- contains all the elements that are visible on the page -->
 </html>
 
+#### AIzaSyBjWIhbcI_sQ7sI1b4LKkfVqn-mIOi704w
+key=API_KEY
+
+https://share.google/aimode/Km3AhwLTiLnDMnRaR
+
+
+<button>Hello</button> <!-- instruction to create a button -->
+
+<p>Hello, Kavya</p> <!-- instruction to create a paragraph -->
+
+<a href="https://www.youtube.com/" 
+   target="_blank">
+   Link to youtube
+</a> <!-- anchor element (link to another website)-->
+<!-- target="_blank" - opens a link in new page -->
+<!-- href and target work only on link element -->
+<!-- Line 3 is a html attribute - modifies how an element behaves -->
+
