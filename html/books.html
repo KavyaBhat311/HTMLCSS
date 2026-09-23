@@ -4,7 +4,10 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Add Book</title>
-        <link href="https://fonts.googleapis.com/css2?family=Allison&display=swap" rel="stylesheet">
+        <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Allison&display=swap"> -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.3.1/css/all.css" integrity="sha512-x9WwyMYBnlXMNQ6kQ/Lyzu1NqIhLQKL5Oq6xByfXuRj7s9CskyCbLv/1IjqzJmXwFXWr0ov6jBV7Qbc0hh9nHg==" crossorigin="anonymous" referrerpolicy="no-referrer">
+        <link rel="stylesheet" href="../styles/books.css"> 
+
     </head>
     <body>
         <header>
@@ -26,7 +29,7 @@
                     <label for="isbn">ISBN:</label>
                     <div class="input-icon">
                         <input type="text" id="isbn" name="isbn" required>
-                        <i class="fa fa-search"></i>
+                        <i onclick="ValidateIsbnAndSearchBook()" class="fa fa-search"></i>
                     </div>
 
                     <label for="authorName">Author Name:</label>
@@ -42,12 +45,14 @@
                     <input type="text" id="genreInput" name="genreInput" required>
 
                     <label for="description">Description</label>
-                    <textarea id="text" id="description" name="description" rows="5" required>
-                </div>
-                <div class="button-container">
-                    <button type="button" class="btns">Submit</button>
+                    <textarea id="description" name="description" rows="5" required></textarea>
                 </div>
             </div>
+            <div class="button-container">
+                    <button type="button" class="btns">Submit</button>
+            </div>
         </div>
+        
+        <script src="../js/books.js"></script>
     </body>
 </html>
